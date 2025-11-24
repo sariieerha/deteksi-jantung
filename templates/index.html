@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Kelainan Jantung</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.16);
+            padding: 30px;
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            width: 380px;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .preview-box {
+            width: 100%;
+            height: 220px;
+            background-color: rgba(255,255,255,0.2);
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        input[type="file"] {
+            margin: 12px 0;
+            background-color: white;
+            padding: 8px;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        button {
+            padding: 12px 18px;
+            width: 100%;
+            background: #ffffff;
+            color: #2575fc;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #e3e3e3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Deteksi Kelainan Jantung</h1>
+
+        <!-- Preview Gambar -->
+        <div class="preview-box" id="previewBox">
+            <p>Belum ada gambar</p>
+        </div>
+
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput" accept="image/*" required>
+            <button type="submit">Prediksi</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const previewBox = document.getElementById('previewBox');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", function() {
+                    previewBox.innerHTML = `<img src="${this.result}" alt="Preview">`;
+                });
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>
