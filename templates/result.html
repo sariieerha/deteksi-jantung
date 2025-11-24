@@ -2,48 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hasil Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Prediksi</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f3f4f6;
-            text-align: center;
-            padding: 40px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
         }
+
         .container {
-            background: white;
+            background-color: rgba(255, 255, 255, 0.16);
             padding: 30px;
-            border-radius: 12px;
-            width: 400px;
-            margin: auto;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            width: 380px;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+            text-align: center;
         }
-        img {
-            width: 300px;
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .img-box {
+            width: 100%;
+            height: 230px;
+            background-color: rgba(255,255,255,0.2);
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             border-radius: 10px;
         }
+
+        .result-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
         a {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #2563eb;
-            color: white;
-            border-radius: 8px;
+            padding: 12px 18px;
+            background: #ffffff;
+            color: #2575fc;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
             text-decoration: none;
+            transition: 0.3s;
         }
+
         a:hover {
-            background: #1e40af;
+            background: #e3e3e3;
         }
     </style>
-
 </head>
+
 <body>
 
     <div class="container">
-        <h2>Hasil Upload</h2>
+        <h2>Hasil Prediksi</h2>
 
-        <img src="{{ image_path }}">
+        <div class="img-box">
+            <img src="{{ image_path }}" alt="Uploaded Image">
+        </div>
+
+        {% if result %}
+            <div class="result-text">
+                {{ result }}
+            </div>
+        {% endif %}
 
         <a href="/">Kembali</a>
     </div>
